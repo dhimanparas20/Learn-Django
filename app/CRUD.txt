@@ -1,0 +1,40 @@
+Create (C):
+    from myapp.models import Professor, Subject
+
+    # Create a new Professor instance
+    professor = Professor.objects.create(fname='John', lname='Doe', doj='2024-02-17', contact='1234567890')
+
+    # Create a new Subject instance associated with a Professor
+    subject = Subject.objects.create(name='Mathematics', code='MATH101', professor=professor)
+
+Read (R):
+
+    # Retrieve all Professor instances
+    professors = Professor.objects.all()
+
+    # Retrieve all Subject instances
+    subjects = Subject.objects.all()
+
+    # Retrieve a specific Professor instance by ID
+    professor = Professor.objects.get(id=1)
+
+    # Retrieve related objects using foreign key relationships
+    subjects_for_professor = professor.subject_set.all()
+
+Update (U):
+    # Retrieve a Professor instance and update its attributes
+    professor = Professor.objects.get(id=1)
+    professor.fname = 'Jane'
+    professor.save()
+
+    # Update attributes of related objects using foreign key relationships
+    subject = Subject.objects.get(id=1)
+    subject.name = 'Physics'
+    subject.save()
+
+Delete (D):
+        professor = Professor.objects.get(id=1)
+        professor.delete()
+
+        # Delete related objects using foreign key relationships
+        Subject.objects.filter(professor_id=1).delete()

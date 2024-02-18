@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Regsiter{% endblock %}
+
+{% block content %} 
+<div class="container">
+    <h2>Register</h2>
+    <form action="/register/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">password:</label>
+            <input type="text" id="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
