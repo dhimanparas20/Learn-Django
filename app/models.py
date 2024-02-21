@@ -1,6 +1,7 @@
 #For more help read : 'https://www.freecodecamp.org/news/common-django-model-fields-and-their-use-cases/'
 from django.db import models
 from django.contrib.auth.hashers import make_password,check_password
+import uuid
 
 class Professor(models.Model):
     fname = models.CharField(max_length=50)
@@ -9,7 +10,7 @@ class Professor(models.Model):
     contact = models.CharField(max_length=10, unique=True)
     
     def __str__(self):
-        return self.fname
+        return self.fname + " " + self.lname
     
 
 class Subject(models.Model):
@@ -22,8 +23,9 @@ class Subject(models.Model):
 
 
 class User(models.Model):
+    # uid = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     username = models.CharField(max_length=10)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100,editable=False)
     def __str__(self):
         return self.username
     
@@ -33,4 +35,4 @@ class User(models.Model):
         
     def check_password(self, raw_password):
         # Check if the provided password matches the hashed password
-        return check_password(raw_password, self.password)    
+        return check_password(raw_password, self.password)     
